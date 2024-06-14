@@ -1,5 +1,6 @@
 def generate_text(prompt):
-    pass
+    return prompt
+    
 
 
 def retreive():
