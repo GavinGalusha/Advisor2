@@ -24,6 +24,7 @@ client = OpenAI(api_key=openai_api_key)
 @main.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        render_template('index.html')
         user_input = request.form.get('user_input')
         return redirect(url_for('main.thank_you', user_input=user_input))
     return render_template('index.html')
