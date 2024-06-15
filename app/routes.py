@@ -1,25 +1,19 @@
 from flask import Blueprint, render_template, request
-from app.functions import generate_text
+from app.functions import generate_text, setup
 from dotenv import load_dotenv
 import os
 from openai import OpenAI
+from llama_index.core import (
+    VectorStoreIndex,
+    SimpleDirectoryReader,
+    StorageContext,
+    load_index_from_storage,
+)
 
 main = Blueprint('main', __name__)
 
-
-# Load the environment variables from the .env file
-from dotenv import load_dotenv
-import os
-from openai import OpenAI
-load_dotenv()
-
-# Access your API key from environment variables
-openai_api_key = os.getenv('OPENAI_API_KEY')
-
-# Initialize the OpenAI client with your API key
-client = OpenAI(api_key=openai_api_key)
-
-
+# -----------------------------------------------------------
+chat_engine = setup()
 
 
 
@@ -29,7 +23,7 @@ def index():
     output = None
     if request.method == 'POST':
         user_input = request.form.get('user_input')
-        output = generate_text(user_input)
+        output = generate_text(chat_engine, user_input)
     return render_template('index.html', output=output)
 
 
