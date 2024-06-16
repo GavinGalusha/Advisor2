@@ -8,15 +8,24 @@
 </head>
 <body>
     <div class="container">
+        <h1>Tulane Academic Advisor Chatbot</h1>
+    </div>
+    <div class="container">
         <form method="POST">
-            <label for="user_input">Enter something:</label>
+            <label for="user_input">Ask any Tulane Specific Questions!</label>
             <input type="text" id="user_input" name="user_input" required>
             <button type="submit">Submit</button>
         </form>
-        {% if output %}
-        <div class="output">
-            <h2>Output:</h2>
-            <p>{{ output }}</p>
+        {% if conversation %}
+        <div class="conversation">
+            <h2>Conversation:</h2>
+            <div class="conversation-container">
+                {% for entry in conversation %}
+                <div class="conversation-entry {{ entry.type }}">
+                    <p><strong>{{ entry.type.capitalize() }}:</strong> {{ entry.text }}</p>
+                </div>
+                {% endfor %}
+            </div>
         </div>
         {% endif %}
     </div>

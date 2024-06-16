@@ -53,7 +53,8 @@ chat_engine = setup()
 print("setup tasks done")
 
 def generate_text(chat_engine, prompt):
-    return chat_engine.chat(prompt)
+    response = chat_engine.chat(prompt)
+    return response.response
 
 def retrieve():
     pass

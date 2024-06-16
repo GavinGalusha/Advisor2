@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     background-image: url('../images/site1.png');
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: fixed; /* This ensures the background image remains fixed */
     margin: 0;
     padding: 0;
 }
@@ -45,17 +45,36 @@ button:hover {
     background-color: #45a049;
 }
 
-.output {
+.conversation {
     margin-top: 20px;
 }
 
-.output h2 {
+.conversation h2 {
     margin-bottom: 10px;
 }
 
-.output p {
+.conversation-entry {
+    margin-bottom: 10px;
     padding: 10px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
+    display: flex;
+    clear: both;
+}
+
+.conversation-entry.question {
+    background-color: #e0f7fa;
+    float: right;
+    clear: both;
+    margin-left: 50%;
+    border-radius: 10px 0 10px 10px;
+}
+
+.conversation-entry.answer {
+    background-color: #fff3e0;
+    float: left;
+    clear: both;
+    margin-right: 50%;
+    border-radius: 0 10px 10px 10px;
 }
