@@ -10,6 +10,8 @@ from llama_index.core import (
 from llama_index.core.storage.docstore.simple_docstore import SimpleDocumentStore
 from llama_index.core.storage.kvstore.simple_kvstore import SimpleKVStore
 
+
+
 # Load the environment variables from the .env file
 
 def setup():
@@ -26,8 +28,8 @@ def setup():
 
     # Check if storage already exists
     def create_index():
-        documents = SimpleDirectoryReader("app/data/Course_Data").load_data()
-        #chunked_documents = chunk_documents(documents)
+        documents = SimpleDirectoryReader("app/data/RAG_Data").load_data()
+        
         index = VectorStoreIndex.from_documents(documents)
         index.storage_context.persist(persist_dir=PERSIST_DIR)
         return index
@@ -44,8 +46,8 @@ def setup():
             print(f"Error loading index: {e}")
             index = create_index()
 
-    query_engine = index.as_query_engine(similarity_top_k=5)
-    chat_engine = index.as_chat_engine()
+    
+    chat_engine = index.as_chat_engine(chat_mode="context", verbose=True)
     return chat_engine
 
 
@@ -56,7 +58,20 @@ def generate_text(chat_engine, prompt):
     response = chat_engine.chat(prompt)
     return response.response
 
-def retrieve():
-    pass
+
+print(generate_text(chat_engine, "What courses are mandatory for the math minor?"))
 
 
+
+#----------------------------------------------------- inserting into index
+from llama_index.core import SummaryIndex, Document
+
+def insert_into_index(index, chunks):
+    doc_chunks = []
+    for i, text in enumerate(chunks):
+        doc = Document(text=text, id_=f"doc_id_{i}")
+        doc_chunks.append(doc)
+
+    # insert
+    for doc_chunk in doc_chunks:
+        index.insert(doc_chunk)
