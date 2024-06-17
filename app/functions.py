@@ -56,8 +56,8 @@ print("setup tasks done")
 
 def generate_text(chat_engine, prompt):
     response = chat_engine.chat(prompt)
-    html_response = '<p>' + '</p><p>'.join(response.split('\n')) + '</p>'
-    return response.response
+    html_response = '<p>' + '</p><p>'.join(response.response.split('\n')) + '</p>'
+    return html_response
 
 
 print(generate_text(chat_engine, "What courses are mandatory for the math minor?"))
