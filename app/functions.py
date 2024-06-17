@@ -56,6 +56,7 @@ print("setup tasks done")
 
 def generate_text(chat_engine, prompt):
     response = chat_engine.chat(prompt)
+    html_response = '<p>' + '</p><p>'.join(response.split('\n')) + '</p>'
     return response.response
 
 
