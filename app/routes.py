@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, session
-from .functions import generate_text, setup
+from .functions import generate_text, setup, save_text_to_file
 from dotenv import load_dotenv
 import markdown
 
@@ -26,6 +26,8 @@ def index():
         session['conversation'] = []
 
     if request.method == 'POST':
+        
+        #handling user asking question
         user_input = request.form.get('user_input')
         if user_input:
             output = generate_text(chat_engine, user_input)
@@ -35,6 +37,14 @@ def index():
 
             response_html = markdown.markdown(output)
             session['conversation'][-1]['text'] = response_html
+
+
+        #handling user adding advice
+        advice_input = request.form.get('advice_input')
+        if advice_input and len(advice_input) < 200:
+            save_text_to_file(advice_input)
+            
+
 
     return render_template('index.html', conversation=session['conversation'])
 

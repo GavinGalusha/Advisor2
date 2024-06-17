@@ -168,3 +168,39 @@ input[type='text'] {
     }
 }
 
+/* Style for the advice form */
+#advice_form {
+    background-color: #004225; /* Dark green background */
+    padding: 10px;
+    width: 300px; /* Smaller width */
+    border-radius: 5px;
+}
+
+#advice_form label {
+    color: #ffffff; /* White color for the label text */
+    display: block; /* Makes the label take the full width */
+    margin-bottom: 5px;
+}
+
+#advice_form input[type="text"] {
+    width: 100%; /* Full width of the form */
+    padding: 8px;
+    margin-bottom: 10px; /* Space below the input field */
+    border: 1px solid #007245; /* Slightly lighter green border */
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the element's width */
+}
+
+#advice_form .submit-button {
+    background-color: #007245; /* Slightly lighter green for the button */
+    color: #ffffff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer; /* Pointer cursor on hover */
+    width: 100%; /* Full width of the form */
+}
+
+#advice_form .submit-button:hover {
+    background-color: #005831; /* Even darker green when hovered */
+}
