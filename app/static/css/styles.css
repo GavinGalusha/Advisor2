@@ -6,6 +6,11 @@ body {
     padding: 0;
     line-height: 1.6;
     padding-bottom: 50px;
+    background-image: url('../images/site1.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* Header styles */
@@ -46,16 +51,9 @@ header::after {
     width: 90%;
 }
 
-.background-container {
-    background-image: url('../images/site1.png'); 
-    background-size: cover;
-    background-attachment: fixed;
-    padding-top: 20px;
-}
-
 /* Form styles */
 form {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     margin: 2rem auto;
     width: 80%;
@@ -110,7 +108,7 @@ input[type='text'] {
 /* Error message styles */
 .flashes, .form-errors {
     padding: 1rem;
-    background: rgba(255, 255, 224, 0.8);
+    background: lightyellow;
     border-left: 5px solid gold;
     margin: 1rem auto;
     width: 80%;
@@ -121,7 +119,7 @@ input[type='text'] {
 .conversation {
     margin: 2rem auto;
     width: 80%;
-    background: rgba(249, 249, 249, 0.8);
+    background: rgba(249, 249, 249, 0.9);
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -138,14 +136,14 @@ input[type='text'] {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.conversation .entry.User {
-    background: rgba(224, 247, 250, 0.8);
+.conversation .entry.question {
+    background: rgba(224, 247, 250, 0.9);
     text-align: right;
     margin-left: 40%;
 }
 
-.conversation .entry.Response {
-    background: rgba(255, 243, 224, 0.8);
+.conversation .entry.answer {
+    background: rgba(255, 243, 224, 0.9);
     text-align: left;
     margin-right: 40%;
 }
