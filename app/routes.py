@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, session
 from app.functions import generate_text, setup
 from dotenv import load_dotenv
+import markdown
+
 import os
 from openai import OpenAI
 from llama_index.core import (
@@ -30,6 +32,9 @@ def index():
             session['conversation'].append({'type': 'User', 'text': user_input})
             session['conversation'].append({'type': 'Response', 'text': output})
             session.modified = True
+
+            response_html = markdown.markdown(output)
+            session['conversation'][-1]['text'] = response_html
 
     return render_template('index.html', conversation=session['conversation'])
 

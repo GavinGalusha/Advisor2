@@ -24,7 +24,7 @@
                 <h2>Conversation:</h2>
                 {% for entry in conversation %}
                 <div class="entry {{ entry.type }}">
-                    <p><strong>{{ entry.type.capitalize() }}:</strong> {{ entry.text }}</p>
+                    <p><strong>{{ entry.type.capitalize() }}:</strong> {{ entry.text | safe }}</p>
                 </div>
                 {% endfor %}
             </div>
