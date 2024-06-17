@@ -29,6 +29,8 @@ def setup():
     # Check if storage already exists
     def create_index():
         documents = SimpleDirectoryReader("app/data/RAG_Data").load_data()
+   
+        
         
         index = VectorStoreIndex.from_documents(documents)
         index.storage_context.persist(persist_dir=PERSIST_DIR)
@@ -60,7 +62,7 @@ def generate_text(chat_engine, prompt):
     return html_response
 
 
-print(generate_text(chat_engine, "What courses are mandatory for the math minor?"))
+
 
 
 

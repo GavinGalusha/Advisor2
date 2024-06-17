@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, session
-from app.functions import generate_text, setup
+from .functions import generate_text, setup
 from dotenv import load_dotenv
 import markdown
 

@@ -29,7 +29,15 @@ header {
 .custom-logo {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) perspective(1500px) rotateY(15deg);
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0) 0px 25px 50px -12px;
+    transition: transform 1s ease 0s;
+}
+
+.tulane-logo:hover,
+.custom-logo:hover {
+    transform: translateY(-60%) perspective(3000px) rotateY(15deg);
 }
 
 .tulane-logo {
@@ -90,6 +98,10 @@ input[type='text'] {
     height: 50px;
     padding: 1rem 2rem;
     width: auto;
+}
+.submit-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 
 .submit-button input[type='submit'] {
@@ -155,3 +167,4 @@ input[type='text'] {
         text-align: left;
     }
 }
+
