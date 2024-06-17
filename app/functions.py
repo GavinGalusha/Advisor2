@@ -59,4 +59,4 @@ def generate_text(chat_engine, prompt):
 def retrieve():
     pass
 
-print(generate_text(chat_engine, "What are the mandatory classes for computer science major?"))
+

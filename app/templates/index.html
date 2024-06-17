@@ -7,27 +7,30 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <div class="container">
+    <header>
+        <img src="{{ url_for('static', filename='images/TU AIdvisor Logo.png') }}" alt="AIdvisor Logo" class="custom-logo">
         <h1>Tulane Academic Advisor Chatbot</h1>
-    </div>
+        <img src="{{ url_for('static', filename='images/Tulane_University_Logo.svg.png') }}" alt="Tulane Logo" class="tulane-logo">
+
+    </header>
+    <div class = "background-container">
     <div class="container">
         <form method="POST">
             <label for="user_input">Ask any Tulane Specific Questions!</label>
             <input type="text" id="user_input" name="user_input" required>
-            <button type="submit">Submit</button>
+            <button type="submit" class="submit-button">Submit</button>
         </form>
         {% if conversation %}
         <div class="conversation">
             <h2>Conversation:</h2>
-            <div class="conversation-container">
-                {% for entry in conversation %}
-                <div class="conversation-entry {{ entry.type }}">
-                    <p><strong>{{ entry.type.capitalize() }}:</strong> {{ entry.text }}</p>
-                </div>
-                {% endfor %}
+            {% for entry in conversation %}
+            <div class="entry {{ entry.type }}">
+                <p><strong>{{ entry.type.capitalize() }}:</strong> {{ entry.text }}</p>
             </div>
+            {% endfor %}
         </div>
         {% endif %}
+    </div>
     </div>
 </body>
 </html>

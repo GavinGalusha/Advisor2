@@ -1,80 +1,159 @@
 body {
-    font-family: Arial, sans-serif;
-    background-image: url('../images/site1.png');
-    background-size: cover;
-    background-attachment: fixed; /* This ensures the background image remains fixed */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #e6e8f4;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
+    padding-bottom: 50px;
 }
 
-.container {
-    width: 50%;
-    margin: 100px auto;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
+/* Header styles */
+header {
+    background: darkgreen;
+    color: white;
+    padding: 1.9rem 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.tulane-logo,
+.custom-logo {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.tulane-logo {
+    right: 40px;
+    height: 110px;
+}
+
+.custom-logo {
+    left: 40px;
+    height: 135px;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 25px;
+    height: 10px;
+    background-image: linear-gradient(to right, rgba(86, 80, 42, 0), rgba(255, 223, 0, 0.75), rgba(86, 80, 42, 0));
+    width: 90%;
+}
+
+.background-container {
+    background-image: url('../images/site1.png'); 
+    background-size: cover;
+    background-attachment: fixed;
+    padding-top: 20px;
+}
+
+/* Form styles */
+form {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    margin: 2rem auto;
+    width: 80%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Shared input styles */
+input[type='text'], .submit-button, .toggle-switch {
+    border-radius: 4px;
+}
+
+/* Input field styles */
+input[type='text'] {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Button styles */
+.submit-button {
+    background-color: darkgreen;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    height: 50px;
+    padding: 1rem 2rem;
+    width: auto;
+}
+
+.submit-button input[type='submit'] {
+    height: 100%;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    background: none;
+    color: inherit;
+}
+
+.submit-button:hover, .submit-button input[type='submit']:hover {
+    background-color: #005500;
+}
+
+/* Error message styles */
+.flashes, .form-errors {
+    padding: 1rem;
+    background: rgba(255, 255, 224, 0.8);
+    border-left: 5px solid gold;
+    margin: 1rem auto;
+    width: 80%;
+    color: darkred;
+}
+
+/* Conversation styles */
+.conversation {
+    margin: 2rem auto;
+    width: 80%;
+    background: rgba(249, 249, 249, 0.8);
+    padding: 1rem;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-bottom: 10px;
-}
-
-input[type="text"] {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-.conversation {
-    margin-top: 20px;
-}
-
 .conversation h2 {
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
 
-.conversation-entry {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    display: flex;
-    clear: both;
+.conversation .entry {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.conversation-entry.question {
-    background-color: #e0f7fa;
-    float: right;
-    clear: both;
-    margin-left: 50%;
-    border-radius: 10px 0 10px 10px;
+.conversation .entry.User {
+    background: rgba(224, 247, 250, 0.8);
+    text-align: right;
+    margin-left: 40%;
 }
 
-.conversation-entry.answer {
-    background-color: #fff3e0;
-    float: left;
-    clear: both;
-    margin-right: 50%;
-    border-radius: 0 10px 10px 10px;
+.conversation .entry.Response {
+    background: rgba(255, 243, 224, 0.8);
+    text-align: left;
+    margin-right: 40%;
+}
+
+@media (max-width: 768px) {
+    .conversation .entry.question,
+    .conversation .entry.answer {
+        margin: 0;
+        text-align: left;
+    }
 }

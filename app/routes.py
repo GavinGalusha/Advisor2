@@ -27,8 +27,8 @@ def index():
         user_input = request.form.get('user_input')
         if user_input:
             output = generate_text(chat_engine, user_input)
-            session['conversation'].append({'type': 'question', 'text': user_input})
-            session['conversation'].append({'type': 'answer', 'text': output})
+            session['conversation'].append({'type': 'User', 'text': user_input})
+            session['conversation'].append({'type': 'Response', 'text': output})
             session.modified = True
 
     return render_template('index.html', conversation=session['conversation'])
