@@ -13,6 +13,15 @@
         <img src="{{ url_for('static', filename='images/Tulane_University_Logo.svg.png') }}" alt="Tulane Logo" class="tulane-logo">
     </header>
     <div class="background-container">
+        
+        
+       
+        
+
+
+
+
+
         <div class="container">
             {% if conversation %}
             <div class="conversation">
@@ -24,11 +33,29 @@
                 {% endfor %}
             </div>
             {% endif %}
-            <form method="POST">
+
+
+            
+
+
+            <form method="POST" action="/">
                 <label for="user_input">Ask any Tulane Specific Questions!</label>
                 <input type="text" id="user_input" name="user_input" required>
                 <button type="submit" class="submit-button">Submit</button>
+            
+                <div class="controls">
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="search-toggle" name="search-mode" class="toggle-checkbox" {% if search_mode == 'Academic Expert' %}checked{% endif %}>
+                        <label for="search-toggle" class="toggle-label">
+                            <span class="switch-text-right">Academic Expert</span>
+                            <span class="switch-text-left">General Advice</span>
+                        </label>
+                    </div>
+                </div>
             </form>
+
+            
+            
             <form id = "advice_form" method="POST">
                 <label for="advice_input">Add some advice and I'll update the knowledge base:</label>
                 <input type="text" id="advice_input" name="advice_input" required>

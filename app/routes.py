@@ -15,7 +15,7 @@ from llama_index.core import (
 main = Blueprint('main', __name__)
 
 # -----------------------------------------------------------
-chat_engine = setup()
+chat_engine1, chat_engine2 = setup()
 
 
 
@@ -25,10 +25,23 @@ def index():
     if 'conversation' not in session:
         session['conversation'] = []
 
+
+    search_mode = 'Academic Expert'
+
+
+    
     if request.method == 'POST':
-        
         #handling user asking question
         user_input = request.form.get('user_input')
+        search_mode = 'Academic Expert' if request.form.get('search-mode') == 'on' else 'General Advice'
+
+        print(search_mode, " activated")
+
+        if search_mode == 'Academic Expert':
+            chat_engine = chat_engine1
+        else:
+            chat_engine = chat_engine2
+
         if user_input:
             output = generate_text(chat_engine, user_input)
             session['conversation'].append({'type': 'User', 'text': user_input})
@@ -46,7 +59,7 @@ def index():
             
 
 
-    return render_template('index.html', conversation=session['conversation'])
+    return render_template('index.html', conversation=session['conversation'], search_mode=search_mode)
 
 
 

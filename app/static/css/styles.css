@@ -204,3 +204,78 @@ input[type='text'] {
 #advice_form .submit-button:hover {
     background-color: #005831; /* Even darker green when hovered */
 }
+
+
+
+  
+  /* Toggle switch styles */
+
+  .toggle-switch {
+    margin-left: 220px; /* Adjustedrom 75px to 20px to move the switch more to the left */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 34px;
+    top: -40px;
+}
+  
+  .toggle-checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .toggle-label {
+    width: inherit;
+    height: inherit;
+    background: #ccc;
+    border-radius: 34px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+  
+  .toggle-label::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: white;
+    transition: 0.3s;
+  }
+  
+  .toggle-checkbox:checked + .toggle-label {
+    background: #4CAF50;
+  }
+  
+  .toggle-checkbox:checked + .toggle-label::before {
+    transform: translateX(26px);
+  }
+  
+  .switch-text-left, .switch-text-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000;
+  }
+  
+  .switch-text-left {
+    left: 70px;
+  }
+  
+  .switch-text-right {
+    right: 70px;
+  }
+  
+  .toggle-checkbox:checked ~ .toggle-label .switch-text-left,
+  .toggle-checkbox:not(:checked) ~ .toggle-label .switch-text-right {
+    display: none;
+  }

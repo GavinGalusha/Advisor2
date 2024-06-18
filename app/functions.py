@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from openai import OpenAI
+import openai
 from llama_index.core import (
     VectorStoreIndex,
     SimpleDirectoryReader,
@@ -10,119 +10,75 @@ from llama_index.core import (
 from llama_index.core.storage.docstore.simple_docstore import SimpleDocumentStore
 from llama_index.core.storage.kvstore.simple_kvstore import SimpleKVStore
 
-
-
 # Load the environment variables from the .env file
-
 def setup():
     load_dotenv()
     # Access your API key from environment variables
     openai_api_key = os.getenv('OPENAI_API_KEY')
 
     # Initialize the OpenAI client with your API key
-    client = OpenAI(api_key=openai_api_key)
+    openai.api_key = openai_api_key
 
     # Define the persistence directory
     PERSIST_DIR = "./index_storage"
     PERSIST_DIR2 = "./index_storage2"
-    
-
 
     # Check if storage already exists
-    def create_index():
-        documents = SimpleDirectoryReader("app/data/RAG_Data").load_data()
+    def create_index(directory, persist_dir):
+        documents = SimpleDirectoryReader(directory).load_data()
         index = VectorStoreIndex.from_documents(documents)
-        index.storage_context.persist(persist_dir=PERSIST_DIR)
+        index.storage_context.persist(persist_dir=persist_dir)
         return index
-    '''
-    def creat_casual_index():
-        documents = SimpleDirectoryReader("app/data/Advice").load_data()
-        index = VectorStoreIndex.from_documents(documents)
-        index.storage_context.persist(persist_dir=PERSIST_DIR2)
-        return index
-    '''
 
-    #creating index for advising
-
+    # Creating index for advising
     if not os.path.exists(PERSIST_DIR):
         os.makedirs(PERSIST_DIR)
-        index = create_index()
+        index = create_index("app/data/RAG_DATA", PERSIST_DIR)
     else:
         try:
             # Load the existing index
             storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR)
             index = load_index_from_storage(storage_context)
+            print("Index loaded successfully for advising")
         except (ValueError, FileNotFoundError) as e:
             print(f"Error loading index: {e}")
-            index = create_index()
+            index = create_index("app/data/RAG_DATA", PERSIST_DIR)
 
-    #creating index for casual
-    '''
+
+    # Creating index for casual
     if not os.path.exists(PERSIST_DIR2):
         os.makedirs(PERSIST_DIR2)
-        index2 = creat_casual_index()
+        index2 = create_index("app/data/Advice", PERSIST_DIR2)
     else:
         try:
             # Load the existing index
-            storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR2)
-            index = load_index_from_storage(storage_context)
+            storage_context2 = StorageContext.from_defaults(persist_dir=PERSIST_DIR2)
+            index2 = load_index_from_storage(storage_context2)
+            print("Index loaded successfully for casual")
         except (ValueError, FileNotFoundError) as e:
             print(f"Error loading index: {e}")
-            index2 = creat_casual_index()
-    '''
-    chat_engine = index.as_chat_engine(chat_mode="context", verbose=True)
-    return chat_engine
+            index2 = create_index("app/data/Advice", PERSIST_DIR2)
 
-
-chat_engine = setup()
-print("setup tasks done")
+    chat_engine1 = index.as_chat_engine(chat_mode="context", verbose=True)
+    chat_engine2 = index2.as_chat_engine(chat_mode="context", verbose=True)
+    print("Setup tasks done, engines created")
+    return chat_engine1, chat_engine2
 
 def generate_text(chat_engine, prompt):
     response = chat_engine.chat(prompt)
+    print(f"Response: {response}")
     html_response = '<p>' + '</p><p>'.join(response.response.split('\n')) + '</p>'
     return html_response
 
+engine1, engine2 = setup()
 
-
+#print(generate_text(engine1, "What are the required computer science classes for the coordinate major?"))
+#print(generate_text(engine2, "What are the most social freshmen dorms?"))
 
 
 
 #----------------------------------------------------- inserting into index
 
-
-''' 
-import os
-from llama_index.core import VectorStoreIndex, Document
-from llama_index.core.extractors import TitleExtractor, QuestionsAnsweredExtractor
-from llama_index.core.node_parser import TokenTextSplitter
-from llama_index.core.ingestion import IngestionPipeline
-
-# Set up text splitter and extractors
-text_splitter = TokenTextSplitter(separator=" ", chunk_size=512, chunk_overlap=128)
-title_extractor = TitleExtractor(nodes=5)
-qa_extractor = QuestionsAnsweredExtractor(questions=3)
-
-# Set up the pipeline
-pipeline = IngestionPipeline(
-    transformations=[text_splitter, title_extractor, qa_extractor]
-)
-
-def insert_text_into_index(index, text):
-    # Create a Document object from the text
-    document = Document(text=text)
-    # Run the document through the ingestion pipeline
-    nodes = pipeline.run(
-        documents=[document],
-        in_place=True,
-        show_progress=False,
-    )
-
-    # Insert the nodes into the index
-    for node in nodes:
-        index.insert(node)
-
-    print("Text has been successfully inserted into the index.")
-'''
 
 def save_text_to_file(text, directory='app/data/Advice', filename_prefix='advice'):
     # Ensure the directory exists
