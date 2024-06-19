@@ -279,3 +279,5 @@ input[type='text'] {
   .toggle-checkbox:not(:checked) ~ .toggle-label .switch-text-right {
     display: none;
   }
+
+  

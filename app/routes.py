@@ -26,7 +26,15 @@ def index():
         session['conversation'] = []
 
 
-    search_mode = 'Academic Expert'
+    if 'search_mode' not in session:
+        session['search_mode'] = 'Academic Expert'  # Default value
+
+    if request.method == 'POST':
+        # Toggle search mode based on checkbox
+        if request.form.get('search-mode') == 'on':
+            session['search_mode'] = 'Academic Expert'
+        else:
+            session['search_mode'] = 'General Advice'
 
 
     
@@ -59,7 +67,7 @@ def index():
             
 
 
-    return render_template('index.html', conversation=session['conversation'], search_mode=search_mode)
+    return render_template('index.html', conversation=session['conversation'], search_mode=session['search_mode'])
 
 
 

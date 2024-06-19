@@ -58,7 +58,7 @@ def setup():
         except (ValueError, FileNotFoundError) as e:
             print(f"Error loading index: {e}")
             index2 = create_index("app/data/Advice", PERSIST_DIR2)
-
+    
     chat_engine1 = index.as_chat_engine(chat_mode="context", verbose=True)
     chat_engine2 = index2.as_chat_engine(chat_mode="context", verbose=True)
     print("Setup tasks done, engines created")
