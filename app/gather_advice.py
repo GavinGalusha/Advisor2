@@ -52,7 +52,7 @@ def list_tables_and_columns(dbname, user, password, host, port):
 
 
 tables = list_tables_and_columns(dbname = dbname, user = user, password = password, host = host, port = port)
-print(tables)
+print(tables["advice"])
 
 
 
