@@ -34,15 +34,16 @@
             </div>
             {% endif %}
 
-
+           
             
 
-
+       
             <form method="POST" action="/">
-                <label for="user_input">Ask any Tulane Specific Questions!</label>
-                <input type="text" id="user_input" name="user_input" required>
+                <label for="user_input"></label>
+                <input type="text" id="user_input" placeholder = "Ask any Tulane Specific Questions!" name ="user_input" required>
                 <button type="submit" class="submit-button">Submit</button>
-                <!--
+            </form>
+                <!-- 
                 <div class="controls">
                     <div class="toggle-switch">
                         <input type="checkbox" id="search-toggle" name="search-mode" class="toggle-checkbox" {% if search_mode == 'Academic Expert' %}checked{% endif %}>
@@ -52,20 +53,23 @@
                         </label>
                     </div>
                 </div>
-                -->
+                
             </form>
+        -->
 
-
+        <form id="advice_form" method="POST" action="{{ url_for('main.submit_advice') }}">
+            <label for="advice_input">Add some advice and I'll update the knowledge base:</label>
+            <input type="text" id="advice_input" name="advice_input" required>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
             
-            <!--
-            <form id = "advice_form" method="POST">
-                <label for="advice_input">Add some advice and I'll update the knowledge base:</label>
-                <input type="text" id="advice_input" name="advice_input" required>
-                <button type="submit" class="submit-button">Submit</button>
-            </form>
-            -->
+            
+            
+            
         </div>
+        
     </div>
+    
     
 
 </body>

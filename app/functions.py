@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
 import openai
+from urllib.parse import urlparse
+
 from llama_index.core import (
     VectorStoreIndex,
     SimpleDirectoryReader,
@@ -9,6 +11,12 @@ from llama_index.core import (
 )
 from llama_index.core.storage.docstore.simple_docstore import SimpleDocumentStore
 from llama_index.core.storage.kvstore.simple_kvstore import SimpleKVStore
+
+
+
+
+
+
 
 # Load the environment variables from the .env file
 def setup():
@@ -58,7 +66,7 @@ def setup():
         except (ValueError, FileNotFoundError) as e:
             print(f"Error loading index: {e}")
             index2 = create_index("app/data/Advice", PERSIST_DIR2)
-    
+
     chat_engine1 = index.as_chat_engine(chat_mode="context", verbose=True)
     chat_engine2 = index2.as_chat_engine(chat_mode="context", verbose=True)
     print("Setup tasks done, engines created")

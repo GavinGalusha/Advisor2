@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, session
 from .functions import generate_text, setup, save_text_to_file
+from flask import request, redirect, url_for
+from .database import db_session, Advice
 from dotenv import load_dotenv
 import markdown
 
@@ -61,13 +63,22 @@ def index():
 
 
         #handling user adding advice
-        advice_input = request.form.get('advice_input')
-        if advice_input and len(advice_input) < 200:
-            save_text_to_file(advice_input)
-            
-
-
+        
     return render_template('index.html', conversation=session['conversation'], search_mode=session['search_mode'])
+
+
+
+
+@main.route('/submit_advice', methods=['POST'])
+def submit_advice():
+    if request.method == 'POST':
+        advice_text = request.form['advice_input']
+        new_advice = Advice(text=advice_text)
+        db_session.add(new_advice)
+        db_session.commit()
+
+        print("advice submitted in flask database")
+        return redirect(url_for('main.index'))  # Redirect to the homepage or any other page
 
 
 
