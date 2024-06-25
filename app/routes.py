@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, session
 from .functions import generate_text, setup, save_text_to_file
 from flask import request, redirect, url_for
-#from .database import db_session, Advice
+from .database import db_session, Advice
 from dotenv import load_dotenv
 import markdown
 
@@ -68,7 +68,7 @@ def index():
 
 
 
-''' 
+
 @main.route('/submit_advice', methods=['POST'])
 def submit_advice():
     if request.method == 'POST':
@@ -79,6 +79,6 @@ def submit_advice():
 
         print("advice submitted in flask database")
         return redirect(url_for('main.index'))  # Redirect to the homepage or any other page
-'''
+
 
 

@@ -2,7 +2,7 @@ import psycopg2
 from urllib.parse import urlparse
 
 
-'''
+
 
 db_url = "postgres://u52dsk3si0k6ia:pf08abb93f28e105ac8c4d3001ab478e029bc71d2ee2e39eb348ee9abb741fc14@c5p86clmevrg5s.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d7b3q6b26t3n4i"
 parsed_url = urlparse(db_url)
@@ -88,4 +88,3 @@ def fetch_text_column(dbname, user, password, host, port, table_name, text_colum
 advice_text = fetch_text_column(dbname = dbname, user = user, password = password, host = host, port = port, table_name = "advice", text_column_name = "text")
 # this will show you the text in the database
 print(advice_text)  
-'''

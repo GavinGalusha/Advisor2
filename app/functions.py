@@ -78,7 +78,8 @@ def generate_text(chat_engine, prompt):
     html_response = '<p>' + '</p><p>'.join(response.response.split('\n')) + '</p>'
     return html_response
 
-engine1, engine2 = setup()
+
+#engine1, engine2 = setup()
 
 #print(generate_text(engine1, "What are the required computer science classes for the coordinate major?"))
 #print(generate_text(engine2, "What are the most social freshmen dorms?"))
