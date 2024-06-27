@@ -1,11 +1,12 @@
 import psycopg2
 from urllib.parse import urlparse
+import os
 
 
+print("starting")
 
-
-db_url = "postgres://u52dsk3si0k6ia:pf08abb93f28e105ac8c4d3001ab478e029bc71d2ee2e39eb348ee9abb741fc14@c5p86clmevrg5s.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d7b3q6b26t3n4i"
-parsed_url = urlparse(db_url)
+database_url = os.getenv('DATABASE_URL')
+parsed_url = urlparse(database_url)
 
 # Extract components from the URL
 dbname = parsed_url.path[1:]  # Skip the leading '/'
@@ -14,6 +15,7 @@ password = parsed_url.password
 host = parsed_url.hostname
 port = parsed_url.port
 
+print("database accessed")
 
 def list_tables_and_columns(dbname, user, password, host, port):
     """Lists all tables and their columns in the specified database."""
@@ -51,13 +53,12 @@ def list_tables_and_columns(dbname, user, password, host, port):
 
 
 
-tables = list_tables_and_columns(dbname = dbname, user = user, password = password, host = host, port = port)
-print(tables["advice"])
 
 
 
 def fetch_text_column(dbname, user, password, host, port, table_name, text_column_name):
     """Fetches the text column from all rows in the specified table."""
+    print("fetching text column")
     conn = None
     try:
         # Connect to the database
