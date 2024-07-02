@@ -85,7 +85,37 @@ def fetch_text_column(dbname, user, password, host, port, table_name, text_colum
 
 
 
+def update_casual_knowledge():
+    advice_text = fetch_text_column(dbname = dbname, user = user, password = password, host = host, port = port, table_name = "advice", text_column_name = "text")
+    
 
-advice_text = fetch_text_column(dbname = dbname, user = user, password = password, host = host, port = port, table_name = "advice", text_column_name = "text")
-# this will show you the text in the database
-print(advice_text)  
+
+    # this is not efficient, but gets the job done
+    import os
+    directory = "app/data/Advice"
+    for filename in os.listdir(directory):
+        if filename.endswith(".txt"):
+            file_path = os.path.join(directory, filename)
+            os.remove(file_path)
+            print(f"Deleted {file_path}")
+    for text in advice_text:
+        with open("app/data/Advice/advice.txt", "a") as file:
+            file.write(text)
+            file.write("\n")
+
+
+
+#advice_text = fetch_text_column(dbname = dbname, user = user, password = password, host = host, port = port, table_name = "advice", text_column_name = "text")
+# this will show you the text in the database under the advice table, 
+# just need to iterate through this list and add it all to the Advice directory here app/data/Advice, not sure if it's important if it's in individual text files or not
+
+
+
+
+
+update_casual_knowledge()
+#print(advice_text)
+
+
+
+

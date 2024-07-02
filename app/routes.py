@@ -73,6 +73,13 @@ def index():
 def submit_advice():
     if request.method == 'POST':
         advice_text = request.form['advice_input']
+
+        # evaluate advice here, some kind of sentiment analysis to test if it's apropriate
+
+
+
+
+
         new_advice = Advice(text=advice_text)
         db_session.add(new_advice)
         db_session.commit()

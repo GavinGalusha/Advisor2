@@ -16,8 +16,6 @@ from llama_index.core.storage.kvstore.simple_kvstore import SimpleKVStore
 
 
 
-
-
 # Load the environment variables from the .env file
 def setup():
     load_dotenv()
@@ -108,3 +106,8 @@ def save_text_to_file(text, directory='app/data/Advice', filename_prefix='advice
         file.write(text)
 
     print(f"Text has been successfully saved to {file_path}")
+
+
+
+
+ 
