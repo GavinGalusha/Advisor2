@@ -5,6 +5,11 @@ import secrets
 secret_key = secrets.token_hex(16)
 
 
+from flask_wtf.csrf import CSRFProtect
+
+csrf = CSRFProtect()
+
+
 def create_app():
     app = Flask(__name__)
     app.secret_key = secret_key

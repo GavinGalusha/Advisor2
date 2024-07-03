@@ -1,18 +1,12 @@
-from flask import Blueprint, render_template, request, session
-from .functions import generate_text, setup, save_text_to_file
+from flask import Blueprint, render_template, request, session, render_template_string
+from .functions import generate_text, setup #is_inappropriate
 from flask import request, redirect, url_for
 from .database import db_session, Advice
 from dotenv import load_dotenv
 import markdown
-
+import re
 import os
 from openai import OpenAI
-from llama_index.core import (
-    VectorStoreIndex,
-    SimpleDirectoryReader,
-    StorageContext,
-    load_index_from_storage,
-)
 
 main = Blueprint('main', __name__)
 
@@ -73,18 +67,19 @@ def index():
 def submit_advice():
     if request.method == 'POST':
         advice_text = request.form['advice_input']
+        
+        # Input validation and sanitization
+        advice_text = re.sub(r'[<>]', '', advice_text)  # Remove HTML tags
+        
+        # Limit input length
+        if len(advice_text) > 500:
+            return "Input too long", 400
 
-        # evaluate advice here, some kind of sentiment analysis to test if it's apropriate
+        # Escape output
+        advice_text = render_template_string('{{ advice_text }}', advice_text=advice_text)
 
+        # Save the sanitized and validated advice_text to your database here
 
-
-
-
-        new_advice = Advice(text=advice_text)
-        db_session.add(new_advice)
-        db_session.commit()
-
-        print("advice submitted in flask database")
         return redirect(url_for('main.index'))  # Redirect to the homepage or any other page
 
 

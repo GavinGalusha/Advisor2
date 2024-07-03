@@ -116,3 +116,6 @@ yarl==1.9.4
 llama-index
 markdown
 sqlalchemy
+
+
+Flask-WTF

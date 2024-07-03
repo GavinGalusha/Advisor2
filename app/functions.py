@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 import openai
 from urllib.parse import urlparse
+#from detoxify import Detoxify
 
 from llama_index.core import (
     VectorStoreIndex,
@@ -11,6 +12,8 @@ from llama_index.core import (
 )
 from llama_index.core.storage.docstore.simple_docstore import SimpleDocumentStore
 from llama_index.core.storage.kvstore.simple_kvstore import SimpleKVStore
+
+
 
 
 
@@ -77,37 +80,24 @@ def generate_text(chat_engine, prompt):
     return html_response
 
 
-#engine1, engine2 = setup()
 
-#print(generate_text(engine1, "What are the required computer science classes for the coordinate major?"))
-#print(generate_text(engine2, "What are the most social freshmen dorms?"))
+
+
+
+''' 
+def is_inappropriate(text):
+    results = Detoxify('original').predict(text)
+    return results
+
+
 
 
 
 #----------------------------------------------------- inserting into index
 
 
-def save_text_to_file(text, directory='app/data/Advice', filename_prefix='advice'):
-    # Ensure the directory exists
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-    
-    # Create a unique filename
-    index = 1
-    while True:
-        filename = f"{filename_prefix}_{index}.txt"
-        file_path = os.path.join(directory, filename)
-        if not os.path.exists(file_path):
-            break
-        index += 1
 
-    # Write the text to the file
-    with open(file_path, 'w') as file:
-        file.write(text)
-
-    print(f"Text has been successfully saved to {file_path}")
+print(is_inappropriate("Have a nice day"))
 
 
-
-
- 
+ '''

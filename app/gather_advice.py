@@ -1,7 +1,7 @@
 import psycopg2
 from urllib.parse import urlparse
 import os
-
+import shutil
 
 print("starting")
 
@@ -87,9 +87,6 @@ def fetch_text_column(dbname, user, password, host, port, table_name, text_colum
 
 def update_casual_knowledge():
     advice_text = fetch_text_column(dbname = dbname, user = user, password = password, host = host, port = port, table_name = "advice", text_column_name = "text")
-    
-
-
     # this is not efficient, but gets the job done
     import os
     directory = "app/data/Advice"
@@ -98,6 +95,14 @@ def update_casual_knowledge():
             file_path = os.path.join(directory, filename)
             os.remove(file_path)
             print(f"Deleted {file_path}")
+
+    
+    storage_dir = "index_storage2"
+    if os.path.exists(storage_dir):
+        shutil.rmtree(storage_dir)
+        print(f"Deleted {storage_dir}")
+
+
     for text in advice_text:
         with open("app/data/Advice/advice.txt", "a") as file:
             file.write(text)
