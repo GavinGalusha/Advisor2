@@ -118,7 +118,7 @@ def update_casual_knowledge():
 
 
 
-update_casual_knowledge()
+#update_casual_knowledge()
 #print(advice_text)
 
 

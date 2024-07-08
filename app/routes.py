@@ -80,7 +80,7 @@ def submit_advice():
 
         # Save the sanitized and validated advice_text to your database here
 
-        return redirect(url_for('main.index'))  # Redirect to the homepage or any other page
+        return redirect(url_for('main.index'))  # Redirect to the homepage or any other page  # Redirect to the homepage or any other page
 
 
 
